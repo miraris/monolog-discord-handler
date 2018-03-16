@@ -7,7 +7,7 @@ use \Monolog\Handler\AbstractProcessingHandler;
 class DiscordHandler extends AbstractProcessingHandler
 {
 	private $initialized = false;
-	private $guzzle;
+	private $client;
 
 	private $name;
 	private $subname;
@@ -16,9 +16,25 @@ class DiscordHandler extends AbstractProcessingHandler
 	private $statement;
 
 	/**
+     * Colors for a given log level.
+     *
+     * @var array
+     */
+    protected $levelColors = [
+        Logger::DEBUG => 10395294,
+        Logger::INFO => 5025616,
+        Logger::NOTICE => 6323595,
+        Logger::WARNING => 16771899,
+        Logger::ERROR => 16007990,
+        Logger::CRITICAL => 16007990,
+        Logger::ALERT => 16007990,
+        Logger::EMERGENCY => 16007990,
+    ];
+
+	/**
 	 * MonologDiscordHandler constructor.
 	 * @param \GuzzleHttp\Client $guzzle
-	 * @param bool $webhooks
+	 * @param array $webhooks
 	 * @param int $level
 	 * @param bool $bubble
 	 */
@@ -26,7 +42,7 @@ class DiscordHandler extends AbstractProcessingHandler
 	{
 		$this->name = $name;
 		$this->subname = $subname;
-		$this->guzzle = new \GuzzleHttp\Client();
+		$this->client = new \GuzzleHttp\Client();
 		$this->webhooks = $webhooks;
 		parent::__construct($level, $bubble);
 	}
@@ -36,16 +52,21 @@ class DiscordHandler extends AbstractProcessingHandler
 	 */
 	protected function write(array $record)
 	{
-		$content = '[' . $record['datetime']->format('Y-m-d H:i:s') . '] ' . $this->name . '.' . $this->subname . '.' . $record['level_name'] . ': ' . $record['message'];
+		$content = [
+			"embeds" => [
+				[
+					"title" => $record['level_name'],
+					"description" => $record['message'],
+					"timestamp" => date('Y-m-d').'T'.date("H:i:s").'.'.date("v").'Z',
+					"color" => $this->levelColors[$record['level']]
+				],
+			],
+		];
 
-		$i = 0;
-		while ($i < count($this->webhooks)){
-			$req = $this->guzzle->request('POST', $this->webhooks[$i], [
-				'form_params' => [
-					'content' => $content
-				]
+		foreach ($this->webhooks as $webhook) {
+			$req = $this->guzzle->request('POST', $webhook, [
+				'json' => $content,
 			]);
-			$i++;
 		}
 	}
 }

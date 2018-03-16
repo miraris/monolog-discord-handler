@@ -1,6 +1,6 @@
 # monolog-discord-handler
 
-A simple monolog handler for support Discord webhooks
+A simple Monolog handler for Discord webhooks
 
 -------------------------------------------------
 
@@ -13,7 +13,7 @@ A simple monolog handler for support Discord webhooks
 
 ## 1. Installing
 
-Easy install via composer. Still no idea what composer is? Inform yourself [here](http://getcomposer.org).
+Easy installation via composer. Still no idea what composer is? Find out here [here](http://getcomposer.org).
 
 ```composer require lefuturiste/monolog-discord-handler```
 
@@ -21,34 +21,34 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 
 ## 2. Usage
 
-Push this handler to your monlog instance:
+Push this handler to your Monolog instance:
 
-### Only one webhooks url
+### Single webhook URL
 
 ```php
 <?php
 require 'vendor/autoload.php';
 
-$log = new Monolog\Logger('your name');
+$log = new Monolog\Logger('name');
 
 $log->pushHandler(new DiscordHandler\DiscordHandler([
-'Discord Webhook url'
+    'https://discordapp.com/api/webhooks/xxx/yyy'
 ], 'name', 'subname', 'DEBUG'));
 
 ```
 
-### Many webhooks url
+### Multiple webhook URLs
 
 
 ```php
 <?php
 require 'vendor/autoload.php';
 
-$log = new Monolog\Logger('your name');
+$log = new Monolog\Logger('name');
 
 $log->pushHandler(new DiscordHandler\DiscordHandler([
-'Discord Webhook url 1',
-'Discord Webhook url 2',
+    'https://discordapp.com/api/webhooks/xxx/yyy',
+    'https://discordapp.com/api/webhooks/xxx/yyy',
 ], 'name', 'subname', 'DEBUG'));
 
 ```
