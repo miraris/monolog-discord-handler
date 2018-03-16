@@ -33,7 +33,7 @@ class DiscordHandler extends AbstractProcessingHandler
 
 	/**
 	 * MonologDiscordHandler constructor.
-	 * @param \GuzzleHttp\Client $guzzle
+	 * @param \GuzzleHttp\Client $client
 	 * @param array $webhooks
 	 * @param int $level
 	 * @param bool $bubble
@@ -64,7 +64,7 @@ class DiscordHandler extends AbstractProcessingHandler
 		];
 
 		foreach ($this->webhooks as $webhook) {
-			$req = $this->guzzle->request('POST', $webhook, [
+			$req = $this->client->request('POST', $webhook, [
 				'json' => $content,
 			]);
 		}
