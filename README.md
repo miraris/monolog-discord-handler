@@ -1,5 +1,8 @@
 # monolog-discord-handler
 
+[![Packagist](https://img.shields.io/packagist/dt/miraris/monolog-discord-handler.svg?style=flat-square)](https://packagist.org/packages/agangofkittens/vgwrap)
+[![Packagist](https://img.shields.io/packagist/v/miraris/monolog-discord-handler.svg?style=flat-square)](https://packagist.org/packages/miraris/monolog-discord-handler)
+
 A simple Monolog handler for Discord webhooks
 
 -------------------------------------------------
@@ -33,7 +36,7 @@ $log = new Monolog\Logger('name');
 
 $log->pushHandler(new DiscordHandler\DiscordHandler([
     'https://discordapp.com/api/webhooks/xxx/yyy'
-], 'name', 'subname', 'DEBUG'));
+], 'DEBUG'));
 
 ```
 
@@ -49,7 +52,7 @@ $log = new Monolog\Logger('name');
 $log->pushHandler(new DiscordHandler\DiscordHandler([
     'https://discordapp.com/api/webhooks/xxx/yyy',
     'https://discordapp.com/api/webhooks/xxx/yyy',
-], 'name', 'subname', 'DEBUG'));
+], 'DEBUG'));
 
 ```
 
@@ -75,6 +78,7 @@ Afterwards create the `App\Logging\CreateDiscordLogger` class.
 namespace App\Logging;
 
 use Monolog\Logger;
+use DiscordHandler\DiscordHandler;
 
 class CreateDiscordLogger
 {
@@ -87,7 +91,7 @@ class CreateDiscordLogger
     public function __invoke(array $config)
     {
         $log = new Logger('mylogger');
-        $log->pushHandler(new DiscordHandler([$config['url']], 'name', 'subname', $config['level']));
+        $log->pushHandler(new DiscordHandler([$config['url']], $config['level']));
 
         return $log;
     }

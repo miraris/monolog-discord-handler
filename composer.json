@@ -1,16 +1,16 @@
 {
-    "name": "lefuturiste/monolog-discord-handler",
-    "description": "A simple monolog handler for support Discord webhooks",
+    "name": "miraris/monolog-discord-handler",
+    "description": "A simple Monolog handler Discord webhooks",
     "type": "library",
     "require": {
-        "monolog/monolog":"*",
-        "guzzlehttp/guzzle":"*"
+        "monolog/monolog":"^1.23",
+        "guzzlehttp/guzzle":"^6.3"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "Matthieu Bessat",
-            "email": "mail@matthieubessat.fr"
+            "name": "Miraris",
+            "email": "miraris@autistici.org"
         }
     ],
     "autoload": {
