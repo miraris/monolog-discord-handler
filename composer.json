@@ -1,6 +1,6 @@
 {
     "name": "miraris/monolog-discord-handler",
-    "description": "A simple Monolog handler Discord webhooks",
+    "description": "A simple Monolog handler for Discord webhooks",
     "type": "library",
     "require": {
         "monolog/monolog":"^1.23",

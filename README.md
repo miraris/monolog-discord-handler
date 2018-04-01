@@ -16,9 +16,32 @@ A simple Monolog handler for Discord webhooks
 
 ## 1. Installing
 
-Easy installation via composer. Still no idea what composer is? Find out here [here](http://getcomposer.org).
 
-```composer require lefuturiste/monolog-discord-handler```
+The recommended way to install monolog-discord-handler is through
+[Composer](http://getcomposer.org).
+
+```bash
+# Install Composer
+curl -sS https://getcomposer.org/installer | php
+```
+
+Next, run the Composer command to install the latest stable version of monolog-discord-handler:
+
+```bash
+php composer.phar require miraris/monolog-discord-handler
+```
+
+After installing, you need to require Composer's autoloader:
+
+```php
+require 'vendor/autoload.php';
+```
+
+You can then later update monolog-discord-handler using composer:
+
+ ```bash
+composer.phar update
+ ```
 
 -------------------------------------------------
 
