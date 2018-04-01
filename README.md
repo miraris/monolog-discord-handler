@@ -52,3 +52,46 @@ $log->pushHandler(new DiscordHandler\DiscordHandler([
 ], 'name', 'subname', 'DEBUG'));
 
 ```
+
+### Laravel
+
+If you'd like to use this in Laravel, you need to create a [custom logging channel](https://laravel.com/docs/5.6/logging#creating-custom-channels) inside `config/logging.php` assuming you're using Laravel 5.6.
+
+```php
+'channels' => [
+    'custom' => [
+        'driver' => 'custom',
+        'url' => 'https://discordapp.com/api/webhooks/xxx/yyy',
+        'via' => App\Logging\CreateDiscordLogger::class,
+        'level' => 'error',
+    ],
+],
+```
+Afterwards create the `App\Logging\CreateDiscordLogger` class.
+
+```php
+<?php
+
+namespace App\Logging;
+
+use Monolog\Logger;
+
+class CreateDiscordLogger
+{
+    /**
+     * Create a custom Discord Monolog instance.
+     *
+     * @param  array  $config
+     * @return \Monolog\Logger
+     */
+    public function __invoke(array $config)
+    {
+        $log = new Logger('mylogger');
+        $log->pushHandler(new DiscordHandler([$config['url']], 'name', 'subname', $config['level']));
+
+        return $log;
+    }
+}
+```
+
+This package has no built-in rate limiting so it's recommended to set the log level to ~warning/error to avoid exceeding the rate limit.
