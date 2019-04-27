@@ -1,5 +1,5 @@
 {
-    "name": "bleizStudio/monolog-discord-handler",
+    "name": "z",
     "description": "A simple Monolog handler for Discord webhooks",
     "type": "library",
     "require": {
@@ -9,8 +9,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "BleizStudio",
-            "email": "contact@bleizstudio.com"
+            "name": "Miraris",
+            "email": "miraris@autistici.org"
         }
     ],
     "autoload": {
