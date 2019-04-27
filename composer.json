@@ -1,5 +1,5 @@
 {
-    "name": "z",
+    "name": "miraris/monolog-discord-handler",
     "description": "A simple Monolog handler for Discord webhooks",
     "type": "library",
     "require": {
