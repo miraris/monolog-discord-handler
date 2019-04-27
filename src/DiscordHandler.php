@@ -68,6 +68,8 @@ class DiscordHandler extends AbstractProcessingHandler
             $this->client->request('POST', $webhook, [
                 'json' => $content,
             ]);
+            # Skip loop repeat
+            unset($webhook);
         }
     }
 }
